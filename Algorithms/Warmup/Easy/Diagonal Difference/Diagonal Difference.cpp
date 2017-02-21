@@ -19,7 +19,7 @@ int main() {
         if (j == i) {
           priSum += input;
         }
-        if (j ==  n - i + 1) {
+        if (j ==  n - i - 1) {
           secSum += input;
         }
       }
