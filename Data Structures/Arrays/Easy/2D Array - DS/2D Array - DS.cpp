@@ -1,34 +1,17 @@
-#include <map>
-#include <set>
-#include <list>
 #include <cmath>
-#include <ctime>
-#include <deque>
-#include <queue>
-#include <stack>
-#include <string>
-#include <bitset>
-#include <cstdio>
-#include <limits>
-#include <vector>
 #include <climits>
-#include <cstring>
-#include <cstdlib>
-#include <fstream>
-#include <numeric>
-#include <sstream>
+#include <vector>
 #include <iostream>
 #include <algorithm>
-#include <unordered_map>
 
 using namespace std;
 
 const int INPUT_ARR_SIZE = 6;
 
 int getSum(vector<vector<int>>* arr, int i, int j) {
-  return arr[i - 1][j - 1] + arr[i - 1][j] + arr[i - 1][j + 1]
-          + arr[i][j]
-          + arr[i + 1][j - 1] + arr[i + 1][j] + arr[i + 1][j + 1]
+  return (*arr)[i - 1][j - 1] + (*arr)[i - 1][j] + (*arr)[i - 1][j + 1]
+          + (*arr)[i][j]
+          + (*arr)[i + 1][j - 1] + (*arr)[i + 1][j] + (*arr)[i + 1][j + 1];
 }
 
 int main(){
@@ -38,12 +21,14 @@ int main(){
       cin >> arr[arr_i][arr_j];
     }
   }
-  int maxSum = 0;
+  
+  int maxSum = INT_MIN;
   for(int i = 1; i < INPUT_ARR_SIZE - 1; ++i) {
-    for(int j = 0; i < INPUT_ARR_SIZE - 1; ++j) {
-      maxSum = max(maxSum, getSum(arr, i, j));
+    for(int j = 1; j < INPUT_ARR_SIZE - 1; ++j) {
+      maxSum = max(maxSum, getSum(&arr, i, j));
     }
   }
+  
   cout << maxSum;
   return 0;
 }
