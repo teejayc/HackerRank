@@ -19,7 +19,7 @@ int main() {
   for(int i = 0; i < n; ++i) {
     int inputNum = 0;
     cin >> inputNum;
-    int remainder = k % inputNum;
+    int remainder = inputNum % k;
     if(remainderMapCount.find(remainder) == remainderMapCount.end()) {
       remainderMapCount[remainder] = 1;
     }
@@ -27,9 +27,19 @@ int main() {
       ++remainderMapCount[remainder];
     }
   }
-
-  for(int i = 0; i < k / 2; ++i) {
-    // TODO:
+  if(remainderMapCount.find(0) != remainderMapCount.end()) {
+    count = remainderMapCount[0] * (remainderMapCount[0] - 1) / 2;
+  }
+  for(int i = 1; i <= k / 2; ++i) {
+    if(remainderMapCount.find(i) != remainderMapCount.end()) {
+      if (i == k - i) {
+        count += remainderMapCount[i] * (remainderMapCount[i] - 1) / 2;
+      }
+      else {
+        count += remainderMapCount[i] * remainderMapCount[k - i];
+      }
+      
+    }
   }
 
   cout << count;
